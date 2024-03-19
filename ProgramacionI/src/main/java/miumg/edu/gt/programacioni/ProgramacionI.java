@@ -1,6 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
+
 
 package miumg.edu.gt.programacioni;
 
@@ -11,10 +9,10 @@ package miumg.edu.gt.programacioni;
 public class ProgramacionI {
 
       public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
+        Scanner scanner = new Scanner(System.in) 
             MenuPrincipal menuPrincipal = new MenuPrincipal(scanner);
             menuPrincipal.mostrarMenu();
-        }
+        
     }
 }
 
