@@ -6,11 +6,11 @@ package miumg.edu.gt.programaigrupo62024;
 
 /**
  *
- * @author sergi
+ * @author Grupo6
  */
 public class ProgramaIGrupo62024 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.out.println("Hello Compañeros");
     }
 }
