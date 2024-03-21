@@ -12,5 +12,6 @@ public class ProgramaIGrupo62024 {
 
     public static void main(String[] args) {
         System.out.println("Hello Compañeros");
-    }
+        System.out.println("Prueba numero 1"); 
+    }    
 }
