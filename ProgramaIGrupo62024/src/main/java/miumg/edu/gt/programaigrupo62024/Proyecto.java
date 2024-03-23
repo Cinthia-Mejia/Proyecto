@@ -15,7 +15,7 @@ public class  Proyecto{
  static Scanner scanner = new Scanner(System.in);
 //        private static List<Carro> carros = new ArrayList<>();
 //        private static List<Avion> aviones = new ArrayList<>();
-//        private static List<Balsa> balsas = new ArrayList<>();
+//         private static List<Balsa> balsas = new ArrayList<>();
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in); // Cerrar el scanner al finalizar
         mostrarMenu();
@@ -89,16 +89,98 @@ public class  Proyecto{
     opcion = scanner.next().charAt(0);
     switch (opcion) {
         case '1':
-        //Carro();
+        Carro();
             break;
         case '2':
-        //Balsa();    
+        Balsa();    
             break;
         case '3':
-        //Avion();    
+        Avion();    
             break;
         default:
             System.out.println("Opción no válida. Intente de nuevo.");
 }
 }
-  }  
+  
+       public static void Carro() {
+        int opcion;
+    Carro carro =new Carro();
+        Scanner scanner = new Scanner(System.in);
+    System.out.println("\n    Vahículo: CARRO");
+    System.out.println("-Tipo de Gasolina:\n ");
+    carro.setGas(scanner.nextLine());
+    System.out.println("-Marca:\n");            
+    carro.setMarca(scanner.nextLine());
+    System.out.println("-Modelo:\n"); 
+    carro.setModelo(scanner.nextLine());
+    System.out.println("-Color:\n"); 
+    carro.setColor(scanner.nextLine());
+    //carros.add(con1, carro);
+     //       con1++;
+    System.out.println("¿Que desea hacer a continuación?:\n 1. Finalizar Programa\n2. Volver a Sub-Menu");     
+    opcion = scanner.next().charAt(0);
+    switch(opcion){
+            case '1':
+            System.out.println("\nGracias por utilizar nuestro programa :D\n       ¡Hasta luego!");
+            System.exit(opcion);
+            break;
+            default:
+            System.out.println("Volviendo a Sub-Menu");
+       }
+} 
+    
+       
+              private static void Balsa() {
+        int opcion;
+     Balsa balsa =new Balsa();
+        Scanner scanner = new Scanner(System.in);
+    System.out.println("\n    Vahículo: BALSA");
+    System.out.println("\n-Motor o remo: ");
+    balsa.setMotor(scanner.nextLine());
+    System.out.println("\n-Marca:");            
+    balsa.setMarca(scanner.nextLine());
+    System.out.println("\n-Modelo:"); 
+    balsa.setModelo(scanner.nextLine());
+    System.out.println("\n-Color:"); 
+    balsa.setColor(scanner.nextLine());
+    //balsas.add(con2, balsa);
+         //   con2++;
+    System.out.println("¿Que desea hacer a continuación?:\n 1. Finalizar Programa\n2. Volver a Sub-Menu"); 
+    opcion = scanner.next().charAt(0);
+    switch(opcion){
+            case '1':
+            System.out.println("\nGracias por utilizar nuestro programa :D\n       ¡Hasta luego!");
+            System.exit(opcion);
+            break;
+            default:
+            System.out.println("Volviendo a Sub-Menu");
+       }
+}
+                 
+              private static void Avion() {
+        int opcion;
+        Avion avion =new Avion();
+        Scanner scanner = new Scanner(System.in);
+    System.out.println("\n    Vahículo: AVION");
+    System.out.println("-Pasajeros(cantidad): ");
+    avion.setPasajeros(scanner.nextInt());
+    System.out.println("-Modelo:"); 
+    avion.setModelo(scanner.nextLine());
+    System.out.println("-Color:"); 
+    avion.setColor(scanner.nextLine());
+    System.out.println("-Marca:");            
+    avion.setMarca(scanner.nextLine());
+    //aviones.add(con3, avion);
+          //  con3++;
+    System.out.println("¿Que desea hacer a continuación?:\n1. Finalizar Programa\n2. Volver a Sub-Menu"); 
+    opcion = scanner.next().charAt(0);
+    switch(opcion){
+            case '1':
+            System.out.println("\nGracias por utilizar nuestro programa :D\n       ¡Hasta luego!");
+            System.exit(opcion);
+            break;
+            default:
+            System.out.println("Volviendo a Sub-Menu");
+       }
+} 
+}
