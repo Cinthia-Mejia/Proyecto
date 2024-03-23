@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class  Proyecto{
-//    static int con1 =0;
-//    static int con2 =0;
-//    static int con3 =0;
+    static int con1 =0;
+    static int con2 =0;
+    static int con3 =0;
  static Scanner scanner = new Scanner(System.in);
-//        private static List<Carro> carros = new ArrayList<>();
-//        private static List<Avion> aviones = new ArrayList<>();
-//         private static List<Balsa> balsas = new ArrayList<>();
+        private static List<Carro> carros = new ArrayList<>();
+        private static List<Avion> aviones = new ArrayList<>();
+         private static List<Balsa> balsas = new ArrayList<>();
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in); // Cerrar el scanner al finalizar
         mostrarMenu();
@@ -64,7 +64,7 @@ public class  Proyecto{
                     ingresarDatosVehiculo();
                     break;
                 case 'b':
-                   // MostrarDatos();
+                    MostrarDatos();
                             
                     break;
                 case 'c':
@@ -98,7 +98,7 @@ public class  Proyecto{
         Avion();    
             break;
         default:
-            System.out.println("Opción no válida. Intente de nuevo.");
+            System.out.println("\nOpción no válida. Intente de nuevo.\n");
 }
 }
   
@@ -115,8 +115,8 @@ public class  Proyecto{
     carro.setModelo(scanner.nextLine());
     System.out.println("-Color:\n"); 
     carro.setColor(scanner.nextLine());
-    //carros.add(con1, carro);
-     //       con1++;
+    carros.add(con1, carro);
+           con1++;
     System.out.println("¿Que desea hacer a continuación?:\n 1. Finalizar Programa\n2. Volver a Sub-Menu");     
     opcion = scanner.next().charAt(0);
     switch(opcion){
@@ -125,7 +125,7 @@ public class  Proyecto{
             System.exit(opcion);
             break;
             default:
-            System.out.println("Volviendo a Sub-Menu");
+            System.out.println("\nVolviendo a Sub-Menu\n");
        }
 } 
     
@@ -143,8 +143,8 @@ public class  Proyecto{
     balsa.setModelo(scanner.nextLine());
     System.out.println("\n-Color:"); 
     balsa.setColor(scanner.nextLine());
-    //balsas.add(con2, balsa);
-         //   con2++;
+    balsas.add(con2, balsa);
+            con2++;
     System.out.println("¿Que desea hacer a continuación?:\n 1. Finalizar Programa\n2. Volver a Sub-Menu"); 
     opcion = scanner.next().charAt(0);
     switch(opcion){
@@ -170,8 +170,8 @@ public class  Proyecto{
     avion.setColor(scanner.nextLine());
     System.out.println("-Marca:");            
     avion.setMarca(scanner.nextLine());
-    //aviones.add(con3, avion);
-          //  con3++;
+    aviones.add(con3, avion);
+            con3++;
     System.out.println("¿Que desea hacer a continuación?:\n1. Finalizar Programa\n2. Volver a Sub-Menu"); 
     opcion = scanner.next().charAt(0);
     switch(opcion){
@@ -183,4 +183,51 @@ public class  Proyecto{
             System.out.println("Volviendo a Sub-Menu");
        }
 } 
+ private static void  MostrarDatos (){
+    int opcion;
+    Carro carrito=new Carro();
+    Balsa balsita=new Balsa();
+    Avion avioncito=new Avion();
+    
+        Scanner scanner = new Scanner(System.in);
+             System.out.println("\n¿Que vehículo desea consultar?\n\n1. Carro\n2. Balsa\n3. Avion\n\n----Ingrese su opción:");
+             opcion = scanner.next().charAt(0);
+             switch(opcion){
+                 case '1':////////////Carro   
+         
+                     if ( carros.isEmpty() == false){ 
+                         for (int i=0; i< carros.size();i++  ){
+                             System.out.println("\n---------Datos Ingresados (CARRO):\nTipo de Gasolina: " + carros.get(i).getGas() +
+                     "\nColor: " + carros.get(i).getColor() + "\nMarca: " + carros.get(i).getMarca() + "\nModelo: " + carros.get(i).getModelo() ); 
+                     }
+                         }
+                     
+                     else{
+                         System.out.println("\nNo se han registrado datos previamente\n");
+                     }                    
+             break;
+                 case '2'://///////////balsa 
+                     if ( balsas.isEmpty() == false){ 
+                         for (int i=0; i< balsas.size();i++  ){
+                             System.out.println("\n---------Datos Ingresados (BALSA):\nMotor o remo: " + balsas.get(i).getMotor() +
+                     "\nColor: " + balsas.get(i).getColor() + "\nMarca: " + balsas.get(i).getMarca() + "\nModelo: " + balsas.get(i).getModelo() ); 
+                     }
+                         }
+                     else{
+                         System.out.println("\nNo se han registrado datos previamente\n");
+                     }
+             break;
+             case '3'://///////////avion
+                 if ( aviones.isEmpty() == false){ 
+                         for (int i=0; i< aviones.size();i++  ){
+                             System.out.println("\n---------Datos Ingresados (AVION):\nTipo de Gasolina: " + aviones.get(i).getPasajeros() +
+                     "\nColor: " + aviones.get(i).getColor() + "\nMarca: " + aviones.get(i).getMarca() + "\nModelo: " + aviones.get(i).getModelo() ); 
+                     }
+                         }
+             else{
+                         System.out.println("\nNo se han registrado datos previamente\n");
+                     }
+             break;
+             }   
+}          
 }
