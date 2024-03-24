@@ -20,10 +20,8 @@ public class  Proyecto{
         Scanner scanner = new Scanner(System.in); // Cerrar el scanner al finalizar
         mostrarMenu();
     }
-
+    
     private static void mostrarMenu() {
-        
-  
       int opcion;
         do {
             System.out.println("\n    Menú Principal");
@@ -49,7 +47,8 @@ public class  Proyecto{
         } while (opcion != 4);
     }
 
-      private static void mostrarSubMenu() {
+      private static void mostrarSubMenu() 
+      {
         char opcion;
         Scanner scanner = new Scanner(System.in);
         do {
@@ -58,18 +57,15 @@ public class  Proyecto{
                     + "c: Crear una torre de Hanoi\nd: Regresar al menú principal");
             System.out.print("\n-----Ingrese su opción: ");
             opcion = scanner.next().charAt(0);
-
             switch (opcion) {
                 case 'a':
                     ingresarDatosVehiculo();
                     break;
                 case 'b':
-                    MostrarDatos();
-                            
+                    MostrarDatos();                         
                     break;
                 case 'c':
-                //TorreHanoi();
-                    
+                    TorreHanoi();         
                     break;
                 case 'd':
                     System.out.println("Regresando al menú principal...");
@@ -79,7 +75,6 @@ public class  Proyecto{
             }
         } while (true);
     }  
-
       
     private static void ingresarDatosVehiculo() {
         int opcion;
@@ -99,9 +94,8 @@ public class  Proyecto{
             break;
         default:
             System.out.println("\nOpción no válida. Intente de nuevo.\n");
+    }
 }
-}
-  
        public static void Carro() {
         int opcion;
     Carro carro =new Carro();
@@ -129,8 +123,7 @@ public class  Proyecto{
        }
 } 
     
-       
-              private static void Balsa() {
+       private static void Balsa() {
         int opcion;
      Balsa balsa =new Balsa();
         Scanner scanner = new Scanner(System.in);
@@ -156,8 +149,8 @@ public class  Proyecto{
             System.out.println("Volviendo a Sub-Menu");
        }
 }
-                 
-              private static void Avion() {
+
+       private static void Avion() {
         int opcion;
         Avion avion =new Avion();
         Scanner scanner = new Scanner(System.in);
