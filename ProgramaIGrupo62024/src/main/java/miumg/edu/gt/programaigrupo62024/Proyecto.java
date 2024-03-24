@@ -1,4 +1,4 @@
-/*
+/* //codigo de Darío
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
@@ -95,7 +95,7 @@ public class  Proyecto{
         default:
             System.out.println("\nOpción no válida. Intente de nuevo.\n");
     }
-}
+} //Codigo de Darío
        public static void Carro() {
         int opcion;
     Carro carro =new Carro();
