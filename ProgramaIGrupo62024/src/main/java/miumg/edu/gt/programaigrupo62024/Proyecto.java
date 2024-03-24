@@ -229,5 +229,34 @@ public class  Proyecto{
                      }
              break;
              }   
-}          
+}   
+ public static void  TorreHanoi (){
+            int numDiscos;
+        do {
+            System.out.print("Ingrese la cantidad de discos (mínimo 3): ");
+            numDiscos = scanner.nextInt();
+            if (numDiscos < 3) {
+                System.out.println("Debe ingresar al menos 3 discos.");
+            }
+        } while (numDiscos < 3);
+
+        System.out.println("\nMovimientos de la Torre de Hanoi:");
+        torreHanoi(numDiscos, 1, 3, 2);
+
+        System.out.print("\n¿Desea regresar al submenú? (s/n): ");
+        char regresar = scanner.next().charAt(0);
+        if (regresar != 's') {
+            System.out.println("Regresando al menú principal...");
+        }
 }
+        public static void torreHanoi(int numDiscos, int torreOrigen, int torreDestino, int torreAuxiliar) {
+        if (numDiscos == 1) {
+            System.out.println(torreOrigen + " --> " + torreDestino);
+        } else {
+            torreHanoi(numDiscos - 1, torreOrigen, torreAuxiliar, torreDestino);
+            System.out.println(torreOrigen + " --> " + torreDestino);
+            torreHanoi(numDiscos - 1, torreAuxiliar, torreDestino, torreOrigen);
+        }
+    }
+
+}  
