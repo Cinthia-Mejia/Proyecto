@@ -25,7 +25,7 @@ public class  Proyecto{
       int opcion;
         do {
             System.out.println("\n    Menú Principal");
-            System.out.println("1: Fase 1 – Objetos y recursividad\n2: Fase 2\n3: Fase 3\n4: Salir del programa");
+            System.out.println("1: Fase 1 – Objetos y recursividad\n2: Fase 2 - Arreglos\n3: Fase 3\n4: Salir del programa");
             System.out.print("\n----Ingrese su opción: ");
             opcion = Integer.parseInt(scanner.next());
             switch (opcion) {
@@ -128,6 +128,9 @@ public class  Proyecto{
     Carro carro =new Carro();
         Scanner scanner = new Scanner(System.in);
     System.out.println("\n    Vahículo: CARRO");
+     System.out.println("-ID:");
+    carro.setIdentificador(scanner.nextInt());
+     scanner.nextLine();
     System.out.println("-Tipo de Gasolina:\n ");
     carro.setGas(scanner.nextLine());
     System.out.println("-Marca:\n");            
@@ -155,6 +158,9 @@ public class  Proyecto{
      Balsa balsa =new Balsa();
         Scanner scanner = new Scanner(System.in);
     System.out.println("\n    Vahículo: BALSA");
+    System.out.println("-ID:");
+    balsa.setIdentificador(scanner.nextInt());
+     scanner.nextLine();
     System.out.println("\n-Motor o remo: ");
     balsa.setMotor(scanner.nextLine());
     System.out.println("\n-Marca:");            
@@ -182,6 +188,9 @@ public class  Proyecto{
         Avion avion =new Avion();
         Scanner scanner = new Scanner(System.in);
     System.out.println("\n    Vahículo: AVION");
+    System.out.println("-ID:");
+    avion.setIdentificador(scanner.nextInt());
+     scanner.nextLine();
     System.out.println("-Pasajeros(cantidad): ");
     avion.setPasajeros(scanner.nextInt());
     System.out.println("-Modelo:"); 
