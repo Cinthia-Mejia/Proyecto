@@ -30,10 +30,10 @@ public class  Proyecto{
             opcion = Integer.parseInt(scanner.next());
             switch (opcion) {
                 case 1:
-                    mostrarSubMenu();
+                    mostrarSubMenu1();
                     break;
                 case 2:
-                    // Fase 2
+                    mostrarSubMenu2();
                     break;
                 case 3:
                     //  Fase 3
@@ -47,7 +47,7 @@ public class  Proyecto{
         } while (opcion != 4);
     }
 
-      private static void mostrarSubMenu() 
+      private static void mostrarSubMenu1() 
       {
         char opcion;
         Scanner scanner = new Scanner(System.in);
@@ -75,7 +75,34 @@ public class  Proyecto{
             }
         } while (true);
     }  
-      
+      private static void mostrarSubMenu2() {
+      char opcion;
+        do {
+            System.out.println("\n    Sub Menú: Fase 2");
+            System.out.println("a: Agregar Carro\nb: Agregar Balsa\nc: Agregar Avión\nd: Ordenar Arreglo\ne: Mostrar Arreglo\n");
+            System.out.print("\n----Ingrese su opción: ");
+            opcion = scanner.next().charAt(0);
+            switch (opcion) {
+                case 'a':
+                    Carro();
+                    break;
+                case 'b':
+                    Balsa();
+                    break;
+                case 'c':
+                    Avion();
+                    break;
+                case 'd':
+//                    ordenarArreglo();
+                    break;
+                 case 'e':
+//                    ImprimirArreglo();    
+                    break;
+                default:
+                    System.out.println("\n\n      Opción no válida. Intente de nuevo");
+            }
+        } while (opcion != 4);
+    }
     private static void ingresarDatosVehiculo() {
         int opcion;
         Scanner scanner = new Scanner(System.in);
