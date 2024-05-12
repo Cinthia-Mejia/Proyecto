@@ -1,6 +1,7 @@
 package miumg.edu.gt.programaigrupo62024;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -336,4 +337,56 @@ for(int i=0; i < vehiculos.length; i++){
     }
         return false;
 }
-}  
+  private static void ordenarArreglo() {
+        if (contGlobal == 0) {
+            System.out.println("     El array está vacío. No se puede ordenar.");
+            return;
+        }
+
+        System.out.print("     ¿En que orden desea imprimir el Array? \na. Ascendente \nb. Descendente\n ");
+        char orden = scanner.next().charAt(0);
+
+        Arrays.sort(vehiculos, 0, contGlobal, (v1, v2) -> {
+            if (orden == 'd') {
+                return Integer.compare(v2.getIdentificador(), v1.getIdentificador()); // Orden descendente
+            } else {
+                return Integer.compare(v1.getIdentificador(), v2.getIdentificador()); // Orden ascendente
+            }
+        });
+
+        System.out.println("\n  El array se ha ordenado.\n");
+        mostrarArreglo(); // Llamar a mostrarArreglo después de ordenar
+    }
+  private static void mostrarArreglo() {
+    if (contGlobal == 0) {
+        System.out.println("\nEl array está vacío. No hay elementos para mostrar.\n");
+        return;
+        }
+
+        System.out.println("Elementos del array:");
+     for (int i = 0; i < contGlobal; i++) {
+        Vehiculo vehiculo = vehiculos[i];
+        System.out.println("Identificador: " + vehiculo.getIdentificador());
+     if (vehiculo instanceof Carro) {
+         Carro carro = (Carro) vehiculo;
+         System.out.println("Tipo de Gasolina: " + carro.getGas());
+         System.out.println("Marca: " + carro.getMarca());
+         System.out.println("Modelo: " + carro.getModelo());
+         System.out.println("Color: " + carro.getColor());
+     } else if (vehiculo instanceof Balsa) {
+         Balsa balsa = (Balsa) vehiculo;
+         System.out.println("Motor o remo: " + balsa.getMotor());
+         System.out.println("Marca: " + balsa.getMarca());
+         System.out.println("Modelo: " + balsa.getModelo());
+         System.out.println("Color: " + balsa.getColor());
+     } else if (vehiculo instanceof Avion) {
+        Avion avion = (Avion) vehiculo;
+        System.out.println("Pasajeros: " + avion.getPasajeros());
+        System.out.println("Marca: " + avion.getMarca());
+        System.out.println("Modelo: " + avion.getModelo());
+        System.out.println("Color: " + avion.getColor());
+        }         
+        System.out.println();  
+}
+}
+}
