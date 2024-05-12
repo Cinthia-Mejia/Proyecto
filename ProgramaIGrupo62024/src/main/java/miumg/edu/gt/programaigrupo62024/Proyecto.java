@@ -389,4 +389,16 @@ for(int i=0; i < vehiculos.length; i++){
         System.out.println();  
 }
 }
+  private static void imprimirArreglo() {
+    if (contGlobal == 0) {
+        System.out.println("El array está vacío. No hay elementos para mostrar.");
+        return;
+    }
+    System.out.println("Elementos del array:");
+    for (int i = 0; i < contGlobal; i++) {
+        Vehiculo vehiculo = vehiculos[i];
+        System.out.println("Identificador: " + vehiculo.getIdentificador());
+ System.out.println(); // Salto de línea para separar los registros     
+}
+}
 }
