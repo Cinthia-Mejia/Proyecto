@@ -14,6 +14,7 @@ package miumg.edu.gt.programaigrupo62024;
         String color;
         String marca;
         String modelo;
+        int identificador;
 
     public String getColor() {
         return color;
@@ -27,6 +28,10 @@ package miumg.edu.gt.programaigrupo62024;
         return modelo;
     }
 
+    public int getIdentificador() {
+        return identificador;
+    }
+
     public void setColor(String color) {
         this.color = color;
     }
@@ -37,6 +42,10 @@ package miumg.edu.gt.programaigrupo62024;
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
+    }
+
+    public void setIdentificador(int identificador) {
+        this.identificador = identificador;
     }
       
 }

@@ -1,7 +1,3 @@
-/* //codigo de Darío
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package miumg.edu.gt.programaigrupo62024;
 
 import java.util.ArrayList;
@@ -9,18 +5,25 @@ import java.util.List;
 import java.util.Scanner;
 
 public class  Proyecto{
+    static int contGlobal=7;
     static int con1 =0;
     static int con2 =0;
     static int con3 =0;
  static Scanner scanner = new Scanner(System.in);
         private static List<Carro> carros = new ArrayList<>();
         private static List<Avion> aviones = new ArrayList<>();
-         private static List<Balsa> balsas = new ArrayList<>();
+        private static List<Balsa> balsas = new ArrayList<>();
+        private static Vehiculo[] vehiculos= new Vehiculo[10];
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in); // Cerrar el scanner al finalizar
+        inicializarVehiculos();
         mostrarMenu();
     }
-    
+    private static void inicializarVehiculos() {
+    for (int i = 0; i < vehiculos.length; i++) {
+        vehiculos[i] = new Vehiculo(); // O inicializa como un objeto de la clase base Vehiculo
+    }
+}  
     private static void mostrarMenu() {
       int opcion;
         do {
@@ -120,47 +123,61 @@ public class  Proyecto{
         Avion();    
             break;
         default:
-            System.out.println("\nOpción no válida. Intente de nuevo.\n");
+            System.out.println("\nOpción no válida. INTENTELO NUEVAMENTE.\n");
     }
 } //Codigo de Darío
        public static void Carro() {
+           if(contGlobal <= 9){             
         int opcion;
     Carro carro =new Carro();
-        Scanner scanner = new Scanner(System.in);
+       Scanner scanner = new Scanner(System.in);
     System.out.println("\n    Vahículo: CARRO");
-     System.out.println("-ID:");
-    carro.setIdentificador(scanner.nextInt());
+    System.out.println("-ID:");
+    int identificador=scanner.nextInt();
      scanner.nextLine();
-    System.out.println("-Tipo de Gasolina:\n ");
+    if(buscarId(identificador)==false){
+        carro.setIdentificador(identificador);
+    System.out.println("-Tipo de Gasolina: ");
     carro.setGas(scanner.nextLine());
-    System.out.println("-Marca:\n");            
+    System.out.println("-Marca:");            
     carro.setMarca(scanner.nextLine());
-    System.out.println("-Modelo:\n"); 
+    System.out.println("-Modelo:"); 
     carro.setModelo(scanner.nextLine());
-    System.out.println("-Color:\n"); 
+    System.out.println("-Color:"); 
     carro.setColor(scanner.nextLine());
-    carros.add(con1, carro);
-           con1++;
-    System.out.println("¿Que desea hacer a continuación?:\n 1. Finalizar Programa\n2. Volver a Sub-Menu");     
+    vehiculos[contGlobal] = carro;   
+            contGlobal++;
+    System.out.println("\n¿Que desea hacer a continuación?:\n 1. Ir al Menú Principal\n2. Agregar otro vehículo");     
     opcion = scanner.next().charAt(0);
     switch(opcion){
-            case '1':
-            System.out.println("\nGracias por utilizar nuestro programa :D\n       ¡Hasta luego!");
-            System.exit(opcion);
+            case '1':   
+            System.out.println("\nVolviendo a Menú Principal\n");
+            mostrarMenu();  
             break;
             default:
             System.out.println("\nVolviendo a Sub-Menu\n");
+    }     
        }
+    else{System.out.println("\nEl ID Ingresado se encuentra regristrado \n       INTENTELO NUEVAMENTE \n");
+    Carro();} 
 } 
+           else{
+               System.out.println("\nAlmacenamiento de Vehiculos lleno\n");
+               mostrarSubMenu2();
+           }
+       }      
     
        private static void Balsa() {
         int opcion;
+       if(contGlobal <= 9){
      Balsa balsa =new Balsa();
         Scanner scanner = new Scanner(System.in);
     System.out.println("\n    Vahículo: BALSA");
-    System.out.println("-ID:");
-    balsa.setIdentificador(scanner.nextInt());
-     scanner.nextLine();
+    System.out.println("-ID:\n ");
+    int identificador=scanner.nextInt();
+    scanner.nextLine();
+    if(buscarId(identificador)==false){
+        balsa.setIdentificador(identificador);
     System.out.println("\n-Motor o remo: ");
     balsa.setMotor(scanner.nextLine());
     System.out.println("\n-Marca:");            
@@ -169,49 +186,70 @@ public class  Proyecto{
     balsa.setModelo(scanner.nextLine());
     System.out.println("\n-Color:"); 
     balsa.setColor(scanner.nextLine());
-    balsas.add(con2, balsa);
-            con2++;
-    System.out.println("¿Que desea hacer a continuación?:\n 1. Finalizar Programa\n2. Volver a Sub-Menu"); 
+    vehiculos[contGlobal] = balsa;   
+            contGlobal++;
+    System.out.println("\n¿Que desea hacer a continuación?:\n\n1. Ir al Menú Principal\n2. Agregar otro vehículo");     
     opcion = scanner.next().charAt(0);
     switch(opcion){
-            case '1':
-            System.out.println("\nGracias por utilizar nuestro programa :D\n       ¡Hasta luego!");
-            System.exit(opcion);
+            case '1':   
+            System.out.println("\nVolviendo a Menú Principal\n");
+            mostrarMenu();  
             break;
             default:
-            System.out.println("Volviendo a Sub-Menu");
+            System.out.println("\nVolviendo a Sub-Menu\n");
+    }     
        }
-}
+    else{System.out.println("\nEl ID Ingresado se encuentra regristrado \n       INTENTELO NUEVAMENTE \n");
+    Balsa();
+    } 
+} else{
+               System.out.println("\nAlmacenamiento de Vehiculos lleno\n");
+               mostrarSubMenu2();
+           }
+       }    
 
        private static void Avion() {
         int opcion;
+        if(contGlobal <= 9){
         Avion avion =new Avion();
         Scanner scanner = new Scanner(System.in);
     System.out.println("\n    Vahículo: AVION");
-    System.out.println("-ID:");
-    avion.setIdentificador(scanner.nextInt());
-     scanner.nextLine();
+    System.out.println("-ID:\n ");
+    int identificador=scanner.nextInt();
+    scanner.nextLine();
+    if(buscarId(identificador)==false){
+    avion.setIdentificador(identificador);
     System.out.println("-Pasajeros(cantidad): ");
     avion.setPasajeros(scanner.nextInt());
     System.out.println("-Modelo:"); 
     avion.setModelo(scanner.nextLine());
+    scanner.nextLine();
     System.out.println("-Color:"); 
     avion.setColor(scanner.nextLine());
     System.out.println("-Marca:");            
     avion.setMarca(scanner.nextLine());
-    aviones.add(con3, avion);
-            con3++;
-    System.out.println("¿Que desea hacer a continuación?:\n1. Finalizar Programa\n2. Volver a Sub-Menu"); 
+    vehiculos[contGlobal] = avion;   
+            contGlobal++;
+    System.out.println("\n¿Que desea hacer a continuación?:\n\n1. Ir al Menú Principal\n2. Agregar otro vehículo");     
     opcion = scanner.next().charAt(0);
     switch(opcion){
-            case '1':
-            System.out.println("\nGracias por utilizar nuestro programa :D\n       ¡Hasta luego!");
-            System.exit(opcion);
+            case '1':   
+            System.out.println("\nVolviendo a Menú Principal\n");
+            mostrarMenu();  
             break;
             default:
-            System.out.println("Volviendo a Sub-Menu");
+            System.out.println("\nVolviendo a Sub-Menu\n");
+    }     
        }
+    else{System.out.println("\nEl ID Ingresado se encuentra regristrado \n       INTENTELO NUEVAMENTE \n");
+    Avion();} 
 } 
+        else{
+               System.out.println("\nAlmacenamiento de Vehiculos lleno\n");
+               mostrarSubMenu2();
+           }
+       }         
+ 
  private static void  MostrarDatos (){
     int opcion;
     Carro carrito=new Carro();
@@ -287,5 +325,15 @@ public class  Proyecto{
             torreHanoi(numDiscos - 1, torreAuxiliar, torreDestino, torreOrigen);
         }
     }
-
+public static boolean buscarId(int id){
+    int  d=id;
+    if(vehiculos!=null){
+for(int i=0; i < vehiculos.length; i++){   
+    if(vehiculos[i].getIdentificador()==d){
+        return true;
+    }
+}
+    }
+        return false;
+}
 }  
