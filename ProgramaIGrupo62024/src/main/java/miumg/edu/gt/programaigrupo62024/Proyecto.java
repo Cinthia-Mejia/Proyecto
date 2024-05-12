@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class  Proyecto{
-    static int contGlobal=7;
+    static int contGlobal=0;
     static int con1 =0;
     static int con2 =0;
     static int con3 =0;
@@ -97,10 +97,10 @@ public class  Proyecto{
                     Avion();
                     break;
                 case 'd':
-//                    ordenarArreglo();
+                    ordenarArreglo();
                     break;
                  case 'e':
-//                    ImprimirArreglo();    
+                    imprimirArreglo();    
                     break;
                 default:
                     System.out.println("\n\n      Opción no válida. Intente de nuevo");
@@ -339,7 +339,7 @@ for(int i=0; i < vehiculos.length; i++){
 }
   private static void ordenarArreglo() {
         if (contGlobal == 0) {
-            System.out.println("     El array está vacío. No se puede ordenar.");
+            System.out.println("    \nEl array está vacío. No se puede ordenar.\n           INGRESE VEHICULOS\n");
             return;
         }
 
@@ -347,7 +347,7 @@ for(int i=0; i < vehiculos.length; i++){
         char orden = scanner.next().charAt(0);
 
         Arrays.sort(vehiculos, 0, contGlobal, (v1, v2) -> {
-            if (orden == 'd') {
+            if (orden == 'b') {
                 return Integer.compare(v2.getIdentificador(), v1.getIdentificador()); // Orden descendente
             } else {
                 return Integer.compare(v1.getIdentificador(), v2.getIdentificador()); // Orden ascendente
@@ -359,11 +359,11 @@ for(int i=0; i < vehiculos.length; i++){
     }
   private static void mostrarArreglo() {
     if (contGlobal == 0) {
-        System.out.println("\nEl array está vacío. No hay elementos para mostrar.\n");
+        System.out.println("\nEl array está vacío. No hay elementos para mostrar.\n           INGRESE VEHICULOS\n");
         return;
         }
 
-        System.out.println("Elementos del array:");
+        System.out.println("\nElementos del array:");
      for (int i = 0; i < contGlobal; i++) {
         Vehiculo vehiculo = vehiculos[i];
         System.out.println("Identificador: " + vehiculo.getIdentificador());
@@ -391,10 +391,10 @@ for(int i=0; i < vehiculos.length; i++){
 }
   private static void imprimirArreglo() {
     if (contGlobal == 0) {
-        System.out.println("El array está vacío. No hay elementos para mostrar.");
+        System.out.println("\nEl array está vacío. No hay elementos para mostrar.\n           INGRESE VEHICULOS\n");
         return;
     }
-    System.out.println("Elementos del array:");
+    System.out.println("\nElementos del array:");
     for (int i = 0; i < contGlobal; i++) {
         Vehiculo vehiculo = vehiculos[i];
         System.out.println("Identificador: " + vehiculo.getIdentificador());
