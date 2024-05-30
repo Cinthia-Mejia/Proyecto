@@ -29,7 +29,7 @@ public class  Proyecto{
       int opcion;
         do {
             System.out.println("\n    Menú Principal");
-            System.out.println("1: Fase 1 – Objetos y recursividad\n2: Fase 2 - Arreglos\n3: Fase 3\n4: Salir del programa");
+            System.out.println("1: Fase 1 – Objetos y recursividad\n2: Fase 2 - Arreglos\n3: Fase 3 - Base de datos\n4: Salir del programa");
             System.out.print("\n----Ingrese su opción: ");
             opcion = Integer.parseInt(scanner.next());
             switch (opcion) {
@@ -40,7 +40,7 @@ public class  Proyecto{
                     mostrarSubMenu2();
                     break;
                 case 3:
-                    //  Fase 3
+                    mostrarSubMenu3();
                     break;
                 case 4:
                     System.out.println("\nGracias por utilizar nuestro programa :D\n       ¡Hasta luego!");
@@ -72,7 +72,7 @@ public class  Proyecto{
                     TorreHanoi();         
                     break;
                 case 'd':
-                    System.out.println("Regresando al menú principal...");
+                    System.out.println("\nRegresando al menú principal...");
                     return; // Regresar al menú principal
                 default:
                     System.out.println("Opción no válida. Intente de nuevo.");
@@ -107,6 +107,36 @@ public class  Proyecto{
             }
         } while (opcion != 4);
     }
+      
+      private static void mostrarSubMenu3() 
+      {
+        char opcion;
+        Scanner scanner = new Scanner(System.in);
+        do {
+            System.out.println("\n    Submenú: Fase 1");
+            System.out.println("a: Trabajar con Carros\nb: Trabajar con Balsas\n"
+                    + "c: Trabajar con Aviones\nd: Regresar al menú principal");
+            System.out.print("\n-----Ingrese su opción: ");
+            opcion = scanner.next().charAt(0);
+            switch (opcion) {
+                case 'a':
+                    
+                    break;
+                case 'b':
+                                             
+                    break;
+                case 'c':
+                             
+                    break;
+                case 'd':
+                    System.out.println("\nRegresando al menú principal...");
+                    return; // Regresar al menú principal
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+            }
+        } while (true);
+    }
+      
     private static void ingresarDatosVehiculo() {
         int opcion;
         Scanner scanner = new Scanner(System.in);
