@@ -2,12 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package clases.db;
+package clases_db;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -18,38 +20,44 @@ import javax.persistence.Table;
  * @author vmora
  */
 @Entity
-@Table(name = "carro", catalog = "BD", schema = "public")
+@Table(name = "carrodb", catalog = "clasesdb", schema = "public")
 @NamedQueries({
-    @NamedQuery(name = "Carro.findAll", query = "SELECT c FROM Carro c")})
-public class Carro implements Serializable {
+    @NamedQuery(name = "Carrodb.findAll", query = "SELECT c FROM Carrodb c"),
+    @NamedQuery(name = "Carrodb.findByIdCarro", query = "SELECT c FROM Carrodb c WHERE c.idCarro = :idCarro"),
+    @NamedQuery(name = "Carrodb.findByGas", query = "SELECT c FROM Carrodb c WHERE c.gas = :gas"),
+    @NamedQuery(name = "Carrodb.findByMarca", query = "SELECT c FROM Carrodb c WHERE c.marca = :marca"),
+    @NamedQuery(name = "Carrodb.findByModelo", query = "SELECT c FROM Carrodb c WHERE c.modelo = :modelo"),
+    @NamedQuery(name = "Carrodb.findByColor", query = "SELECT c FROM Carrodb c WHERE c.color = :color")})
+public class Carrodb implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "identificador", nullable = false)
-    private Integer identificador;
+    @Column(name = "id_carro", nullable = false)
+    private Integer idCarro;
     @Column(name = "gas", length = 10)
     private String gas;
-    @Column(name = "marca", length = 10)
+    @Column(name = "marca", length = 15)
     private String marca;
     @Column(name = "modelo", length = 10)
     private String modelo;
-    @Column(name = "color", length = 10)
+    @Column(name = "color", length = 15)
     private String color;
 
-    public Carro() {
+    public Carrodb() {
     }
 
-    public Carro(Integer identificador) {
-        this.identificador = identificador;
+    public Carrodb(Integer idCarro) {
+        this.idCarro = idCarro;
     }
 
-    public Integer getIdentificador() {
-        return identificador;
+    public Integer getIdCarro() {
+        return idCarro;
     }
 
-    public void setIdentificador(Integer identificador) {
-        this.identificador = identificador;
+    public void setIdCarro(Integer idCarro) {
+        this.idCarro = idCarro;
     }
 
     public String getGas() {
@@ -87,18 +95,18 @@ public class Carro implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (identificador != null ? identificador.hashCode() : 0);
+        hash += (idCarro != null ? idCarro.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Carro)) {
+        if (!(object instanceof Carrodb)) {
             return false;
         }
-        Carro other = (Carro) object;
-        if ((this.identificador == null && other.identificador != null) || (this.identificador != null && !this.identificador.equals(other.identificador))) {
+        Carrodb other = (Carrodb) object;
+        if ((this.idCarro == null && other.idCarro != null) || (this.idCarro != null && !this.idCarro.equals(other.idCarro))) {
             return false;
         }
         return true;
@@ -106,7 +114,7 @@ public class Carro implements Serializable {
 
     @Override
     public String toString() {
-        return "clases.db.Carro[ identificador=" + identificador + " ]";
+        return "clases_db.Carrodb[ idCarro=" + idCarro + " ]";
     }
     
 }

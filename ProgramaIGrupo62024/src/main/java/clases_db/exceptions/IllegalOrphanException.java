@@ -1,4 +1,4 @@
-package clases.db.exceptions;
+package clases_db.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,12 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package clases.db;
+package clases_db;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -18,38 +20,44 @@ import javax.persistence.Table;
  * @author vmora
  */
 @Entity
-@Table(name = "avion", catalog = "BD", schema = "public")
+@Table(name = "aviondb", catalog = "clasesdb", schema = "public")
 @NamedQueries({
-    @NamedQuery(name = "Avion.findAll", query = "SELECT a FROM Avion a")})
-public class Avion implements Serializable {
+    @NamedQuery(name = "Aviondb.findAll", query = "SELECT a FROM Aviondb a"),
+    @NamedQuery(name = "Aviondb.findByIdAvion", query = "SELECT a FROM Aviondb a WHERE a.idAvion = :idAvion"),
+    @NamedQuery(name = "Aviondb.findByPasajeros", query = "SELECT a FROM Aviondb a WHERE a.pasajeros = :pasajeros"),
+    @NamedQuery(name = "Aviondb.findByMarca", query = "SELECT a FROM Aviondb a WHERE a.marca = :marca"),
+    @NamedQuery(name = "Aviondb.findByModelo", query = "SELECT a FROM Aviondb a WHERE a.modelo = :modelo"),
+    @NamedQuery(name = "Aviondb.findByColor", query = "SELECT a FROM Aviondb a WHERE a.color = :color")})
+public class Aviondb implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "identificador", nullable = false)
-    private Integer identificador;
+    @Column(name = "id_avion", nullable = false)
+    private Integer idAvion;
     @Column(name = "pasajeros")
     private Integer pasajeros;
-    @Column(name = "marca", length = 10)
+    @Column(name = "marca", length = 15)
     private String marca;
     @Column(name = "modelo", length = 10)
     private String modelo;
-    @Column(name = "color", length = 10)
+    @Column(name = "color", length = 15)
     private String color;
 
-    public Avion() {
+    public Aviondb() {
     }
 
-    public Avion(Integer identificador) {
-        this.identificador = identificador;
+    public Aviondb(Integer idAvion) {
+        this.idAvion = idAvion;
     }
 
-    public Integer getIdentificador() {
-        return identificador;
+    public Integer getIdAvion() {
+        return idAvion;
     }
 
-    public void setIdentificador(Integer identificador) {
-        this.identificador = identificador;
+    public void setIdAvion(Integer idAvion) {
+        this.idAvion = idAvion;
     }
 
     public Integer getPasajeros() {
@@ -87,18 +95,18 @@ public class Avion implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (identificador != null ? identificador.hashCode() : 0);
+        hash += (idAvion != null ? idAvion.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Avion)) {
+        if (!(object instanceof Aviondb)) {
             return false;
         }
-        Avion other = (Avion) object;
-        if ((this.identificador == null && other.identificador != null) || (this.identificador != null && !this.identificador.equals(other.identificador))) {
+        Aviondb other = (Aviondb) object;
+        if ((this.idAvion == null && other.idAvion != null) || (this.idAvion != null && !this.idAvion.equals(other.idAvion))) {
             return false;
         }
         return true;
@@ -106,7 +114,7 @@ public class Avion implements Serializable {
 
     @Override
     public String toString() {
-        return "clases.db.Avion[ identificador=" + identificador + " ]";
+        return "clases_db.Aviondb[ idAvion=" + idAvion + " ]";
     }
     
 }

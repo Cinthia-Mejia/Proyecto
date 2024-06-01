@@ -1,9 +1,15 @@
 package miumg.edu.gt.programaigrupo62024;
 
+
+import clases_db.Carrodb;
+import clases_db.CarrodbJpaController;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class  Proyecto{
     static int contGlobal=0;
@@ -43,7 +49,8 @@ public class  Proyecto{
                     mostrarSubMenu3();
                     break;
                 case 4:
-                    System.out.println("\nGracias por utilizar nuestro programa :D\n       ¡Hasta luego!");
+                    System.out.println("\nGracias por utilizar nuestro programa :D\n       ¡Hasta luego!"); 
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("\n\n      Opción no válida. Intente de nuevo");
@@ -113,14 +120,14 @@ public class  Proyecto{
         char opcion;
         Scanner scanner = new Scanner(System.in);
         do {
-            System.out.println("\n    Submenú: Fase 1");
+            System.out.println("\n    Submenú: Fase 3");
             System.out.println("a: Trabajar con Carros\nb: Trabajar con Balsas\n"
                     + "c: Trabajar con Aviones\nd: Regresar al menú principal");
             System.out.print("\n-----Ingrese su opción: ");
             opcion = scanner.next().charAt(0);
             switch (opcion) {
                 case 'a':
-                    
+                    trabajarCarro();
                     break;
                 case 'b':
                                              
@@ -157,46 +164,46 @@ public class  Proyecto{
             System.out.println("\nOpción no válida. INTENTELO NUEVAMENTE.\n");
     }
 } //Codigo de Darío
-       public static void Carro() {
-           if(contGlobal <= 9){             
-        int opcion;
-    Carro carro =new Carro();
-       Scanner scanner = new Scanner(System.in);
-    System.out.println("\n    Vahículo: CARRO");
-    System.out.println("-ID:");
-    int identificador=scanner.nextInt();
-     scanner.nextLine();
-    if(buscarId(identificador)==false){
-        carro.setIdentificador(identificador);
-    System.out.println("-Tipo de Gasolina: ");
-    carro.setGas(scanner.nextLine());
-    System.out.println("-Marca:");            
-    carro.setMarca(scanner.nextLine());
-    System.out.println("-Modelo:"); 
-    carro.setModelo(scanner.nextLine());
-    System.out.println("-Color:"); 
-    carro.setColor(scanner.nextLine());
-    vehiculos[contGlobal] = carro;   
-            contGlobal++;
-    System.out.println("\n¿Que desea hacer a continuación?:\n 1. Ir al Menú Principal\n2. Agregar otro vehículo");     
-    opcion = scanner.next().charAt(0);
-    switch(opcion){
-            case '1':   
-            System.out.println("\nVolviendo a Menú Principal\n");
-            mostrarMenu();  
-            break;
-            default:
-            System.out.println("\nVolviendo a Sub-Menu\n");
-    }     
-       }
-    else{System.out.println("\nEl ID Ingresado se encuentra regristrado \n       INTENTELO NUEVAMENTE \n");
-    Carro();} 
-} 
-           else{
-               System.out.println("\nAlmacenamiento de Vehiculos lleno\n");
-               mostrarSubMenu2();
-           }
-       }      
+        public static void Carro() {
+            if(contGlobal <= 9){             
+         int opcion;
+     Carro carro =new Carro();
+        Scanner scanner = new Scanner(System.in);
+     System.out.println("\n    Vahículo: CARRO");
+     System.out.println("-ID:");
+     int identificador=scanner.nextInt();
+      scanner.nextLine();
+     if(buscarId(identificador)==false){
+         carro.setIdentificador(identificador);
+     System.out.println("-Tipo de Gasolina: ");
+     carro.setGas(scanner.nextLine());
+     System.out.println("-Marca:");            
+     carro.setMarca(scanner.nextLine());
+     System.out.println("-Modelo:"); 
+     carro.setModelo(scanner.nextLine());
+     System.out.println("-Color:"); 
+     carro.setColor(scanner.nextLine());
+     vehiculos[contGlobal] = carro;   
+             contGlobal++;
+     System.out.println("\n¿Que desea hacer a continuación?:\n 1. Ir al Menú Principal\n2. Agregar otro vehículo");     
+     opcion = scanner.next().charAt(0);
+     switch(opcion){
+             case '1':   
+             System.out.println("\nVolviendo a Menú Principal\n");
+             mostrarMenu();  
+             break;
+             default:
+             System.out.println("\nVolviendo a Sub-Menu\n");
+     }     
+        }
+     else{System.out.println("\nEl ID Ingresado se encuentra regristrado \n       INTENTELO NUEVAMENTE \n");
+     Carro();} 
+ } 
+            else{
+                System.out.println("\nAlmacenamiento de Vehiculos lleno\n");
+                mostrarSubMenu2();
+            }
+        }      
     
        private static void Balsa() {
         int opcion;
@@ -430,5 +437,183 @@ for(int i=0; i < vehiculos.length; i++){
         System.out.println("Identificador: " + vehiculo.getIdentificador());
  System.out.println(); // Salto de línea para separar los registros     
 }
+}
+                            ///////////////////////////////////////// FASE 3 ////////////////////////////////////////
+  public static void preguntaFinal(){
+      Scanner sc = new Scanner(System.in);
+      System.out.println("\n¿Qué desea hacer a continuación?:\n1. Ir al Menú Principal\n2. Agregar otro vehículo");     
+        int opcion = sc.nextInt();  
+        sc.nextLine(); 
+    switch (opcion) {
+        case 1:   
+            System.out.println("\nVolviendo a Menú Principal\n");
+            mostrarMenu();  
+            break;
+        case 2:
+            System.out.println("\nContinuar en FASE 3\n");
+            mostrarSubMenu3();
+            break;
+        default:
+            System.out.println("\nOpción no válida. Volviendo a Sub-Menu\n");
+            break;
+    }
+  }
+  
+       private static void trabajarCarro (){
+        char opcion;
+        Scanner scanner = new Scanner(System.in);
+        do {
+            System.out.println("\n       Trabajando con CARROS");
+            System.out.println(" C: Insertar\n R: Consultar\n"
+                    + " U: Actualizar\n D: Eliminar\n A: Volver al Menu Principal");
+            System.out.print("\n------Ingrese su opción: ");
+            opcion = scanner.next().charAt(0);
+            switch (opcion) {
+                case 'C':
+                    insertCarro();
+                    break;
+                case 'R':
+                    consultCarro();                      
+                    break;
+                case 'U':
+                    actualizarCarro();      
+                    break;
+                case 'D':
+                    deleteCarro();         
+                    break;
+                case 'A':
+                    System.out.println("\nRegresando al menú principal...");
+                    mostrarMenu();
+                    break; // Regresar al menú principal
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+            }
+        } while (true);
+    }
+    
+public static void insertCarro() { 
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("miumg.edu.gt_Proyecto_jar_1.0-SNAPSHOTPU");
+    EntityManager em = emf.createEntityManager();
+    Scanner sc = new Scanner(System.in);  // Definir Scanner al inicio y usar el mismo en todo el método
+    Carrodb inCarro = new Carrodb();      
+    
+    System.out.println("\n    Insertar: CARRO");
+    System.out.println("-Tipo de Gasolina: ");
+    String gas = sc.nextLine();
+    inCarro.setGas(gas);
+    System.out.println("-Marca:");
+    String marca = sc.nextLine();
+    inCarro.setMarca(marca);
+    System.out.println("-Modelo:");
+    String modelo = sc.nextLine();
+    inCarro.setModelo(modelo);
+    System.out.println("-Color:"); 
+    String color = sc.nextLine();
+    inCarro.setColor(color);
+
+    try {
+        em.getTransaction().begin();
+        em.persist(inCarro);
+        em.getTransaction().commit();
+        System.out.println("Carro insertado correctamente.");
+    } catch (Exception e) {
+        if (em.getTransaction().isActive()) {
+            em.getTransaction().rollback();
+        }
+        System.out.println("Exception-> " + e);
+    } finally {
+        em.close();
+    }
+    preguntaFinal();
+} 
+public static void consultCarro() { 
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("miumg.edu.gt_Proyecto_jar_1.0-SNAPSHOTPU");
+    EntityManager em = emf.createEntityManager();
+    Scanner sc=new Scanner (System.in);
+    List<Carrodb> carroArray = new ArrayList<>();
+    CarrodbJpaController carroConsult=new CarrodbJpaController(emf);
+    try{
+       carroArray= carroConsult.findCarrodbEntities();
+    }catch(Exception e){
+        e.printStackTrace();
+    }finally{
+        em.close();
+    }
+    for (Carrodb carro:carroArray){
+        System.out.println("\nID: "+ carro.getIdCarro());
+        System.out.println("Gas: "+ carro.getGas());
+        System.out.println("Marca: "+ carro.getMarca());
+        System.out.println("Modelo: "+ carro.getModelo());
+        System.out.println("Color: "+ carro.getColor());
+}
+    preguntaFinal();
+}
+
+public static void actualizarCarro() {
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("miumg.edu.gt_Proyecto_jar_1.0-SNAPSHOTPU");
+    EntityManager em = emf.createEntityManager();
+    Scanner sc = new Scanner(System.in);
+    CarrodbJpaController carroConsult = new CarrodbJpaController(emf);
+    System.out.println("\nIngrese el ID para modificar:");
+    int id = sc.nextInt();   
+    Carrodb actCarro = carroConsult.findCarrodb(id);
+    if (actCarro != null) {
+        try {
+            System.out.println("Ingrese el nuevo color:");
+            String nuevoColor = sc.next();
+            System.out.println("Ingrese el nuevo tipo de gas:");
+            String nuevoGas = sc.next();
+            System.out.println("Ingrese la nueva marca:");
+            String nuevaMarca = sc.next();
+            System.out.println("Ingrese el nuevo modelo:");
+            String nuevoModelo = sc.next();            
+            em.getTransaction().begin();
+            actCarro.setColor(nuevoColor);
+            actCarro.setGas(nuevoGas);
+            actCarro.setMarca(nuevaMarca);
+            actCarro.setModelo(nuevoModelo);
+            em.merge(actCarro);// método merge para actualizar el objeto 
+            em.getTransaction().commit();
+            System.out.println("\n  El registro ha sido actualizado exitosamente :D");
+            preguntaFinal();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
+    } else {
+        System.out.println("\n  El ID no se encuentra registrado\n     INTENTE NUEVAMENTE");
+        actualizarCarro();
+    }
+}
+public static void deleteCarro() {
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("miumg.edu.gt_Proyecto_jar_1.0-SNAPSHOTPU");
+    EntityManager em = emf.createEntityManager();
+    Scanner sc = new Scanner(System.in);
+    CarrodbJpaController carroConsult = new CarrodbJpaController(emf);
+    System.out.println("\nIngrese el ID para eliminar:");
+    int id = sc.nextInt();   
+    Carrodb delCarro = carroConsult.findCarrodb(id);
+    if (delCarro != null) {
+        try {            
+            em.getTransaction().begin();
+            delCarro = em.find(Carrodb.class, id);
+            em.remove(delCarro);
+            em.getTransaction().commit();
+            System.out.println("\n  El registro ha sido eliminado exitosamente :D");
+            preguntaFinal();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
+    } else {
+        System.out.println("\n  El ID no se encuentra registrado\n     INTENTE NUEVAMENTE");
+        deleteCarro();
+    }
 }
 }
