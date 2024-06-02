@@ -1,6 +1,8 @@
 package miumg.edu.gt.programaigrupo62024;
 
 
+import clases_db.Aviondb;
+import clases_db.AviondbJpaController;
 import clases_db.Balsadb;
 import clases_db.BalsadbJpaController;
 import clases_db.Carrodb;
@@ -135,7 +137,7 @@ public class  Proyecto{
                     trabajarBalsa();                         
                     break;
                 case 'c':
-                             
+                    trabajarAvion ();         
                     break;
                 case 'd':
                     System.out.println("\nRegresando al menú principal...");
@@ -723,7 +725,7 @@ public static void actualizarBalsa() {
         try {
             System.out.println("Ingrese el nuevo color:");
             String nuevoColor = sc.next();
-            System.out.println("Ingrese el nuevo tipo de Motor:");
+            System.out.println("Ingrese el nuevo tipo de Motor o remo:");
             String nuevoMotor = sc.next();
             System.out.println("Ingrese la nueva marca:");
             String nuevaMarca = sc.next();
@@ -779,5 +781,162 @@ public static void deleteBalsa() {
         deleteBalsa();
 }
 
+}
+//Codigo Realizado Cinthia Y Dario
+   private static void trabajarAvion (){
+        char opcion;
+        Scanner scanner = new Scanner(System.in);
+        do {
+            System.out.println("\n       Trabajando con AVIONES");
+            System.out.println(" C: Insertar\n R: Consultar\n"
+                    + " U: Actualizar\n D: Eliminar\n A: Volver al Menu Principal");
+            System.out.print("\n------Ingrese su opción: ");
+            opcion = scanner.next().charAt(0);
+            switch (opcion) {
+                case 'C':
+                    insertAvion();
+                    break;
+                case 'R':
+                    consultAvion();                      
+                    break;
+                case 'U':
+                    actualizarAvion();      
+                    break;
+                case 'D':
+                    deleteAvion();         
+                    break;
+                case 'A':
+                    System.out.println("\nRegresando al menú principal...");
+                    mostrarMenu();
+                    break; // Regresar al menú principal
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+            }
+        } while (true);
+   }
+   public static void insertAvion() { 
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("miumg.edu.gt_Proyecto_jar_1.0-SNAPSHOTPU");
+    EntityManager em = emf.createEntityManager();
+    Scanner sc = new Scanner(System.in);  // Definir Scanner al inicio y usar el mismo en todo el método
+    Aviondb inAvion = new Aviondb();      
+    
+    System.out.println("\n    Insertar: AVION");
+    System.out.println("-Pasajeros: ");
+    int pasajeros = sc.nextInt();
+    sc.nextLine(); // Limpiar el buffer
+    inAvion.setPasajeros(pasajeros);
+    
+    System.out.println("-Marca:");
+    String marca = sc.nextLine();
+    inAvion.setMarca(marca);
+    
+    System.out.println("-Modelo:");
+    String modelo = sc.nextLine();
+    inAvion.setModelo(modelo);
+    
+    System.out.println("-Color:"); 
+    String color = sc.nextLine();
+    inAvion.setColor(color);
+try {
+        em.getTransaction().begin();
+        em.persist(inAvion);
+        em.getTransaction().commit();
+        System.out.println("Avion insertado correctamente.");
+    } catch (Exception e) {
+        if (em.getTransaction().isActive()) {
+            em.getTransaction().rollback();
+        }
+        System.out.println("Exception-> " + e);
+    } finally {
+        em.close();
+    }
+    preguntaFinal();
+}
+public static void consultAvion() { 
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("miumg.edu.gt_Proyecto_jar_1.0-SNAPSHOTPU");
+    EntityManager em = emf.createEntityManager();
+    Scanner sc=new Scanner (System.in);
+    List<Aviondb> avionArray = new ArrayList<>();
+    AviondbJpaController avionConsult=new AviondbJpaController(emf);
+    try{
+       avionArray= avionConsult.findAviondbEntities();
+    }catch(Exception e){
+        e.printStackTrace();
+    }finally{
+        em.close();
+    }
+    for (Aviondb avion:avionArray){
+        System.out.println("\nID: "+ avion.getIdAvion());
+        System.out.println("Pasajeros: "+ avion.getPasajeros());
+        System.out.println("Marca: "+ avion.getMarca());
+        System.out.println("Modelo: "+ avion.getModelo());
+        System.out.println("Color: "+ avion.getColor());
+}
+    preguntaFinal();
+}
+public static void actualizarAvion() {
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("miumg.edu.gt_Proyecto_jar_1.0-SNAPSHOTPU");
+    EntityManager em = emf.createEntityManager();
+    Scanner sc = new Scanner(System.in);
+    AviondbJpaController avionConsult = new AviondbJpaController(emf);
+    System.out.println("\nIngrese el ID para modificar:");
+    int id = sc.nextInt();   
+    Aviondb actAvion = avionConsult.findAviondb(id);
+    if (actAvion != null) {
+        try {
+            System.out.println("Ingrese el nuevo color:");
+            String nuevoColor = sc.next();
+            System.out.println("Ingrese el nuevo tipo de Pasajeros:");
+            int nuevoPasajero = sc.nextInt();
+            System.out.println("Ingrese la nueva marca:");
+            String nuevaMarca = sc.next();
+            System.out.println("Ingrese el nuevo modelo:");
+            String nuevoModelo = sc.next();            
+            em.getTransaction().begin();
+            actAvion.setPasajeros(nuevoPasajero);
+            actAvion.setMarca(nuevaMarca);
+            actAvion.setModelo(nuevoModelo);
+            em.merge(actAvion);// método merge para actualizar el objeto 
+            em.getTransaction().commit();
+            System.out.println("\n  El registro ha sido actualizado exitosamente :D");
+            preguntaFinal();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+em.close();
+            emf.close();
+        }
+    } else {
+        System.out.println("\n  El ID no se encuentra registrado\n     INTENTE NUEVAMENTE");
+        actualizarAvion();
+    }
+}
+public static void deleteAvion() {
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("miumg.edu.gt_Proyecto_jar_1.0-SNAPSHOTPU");
+    EntityManager em = emf.createEntityManager();
+    Scanner sc = new Scanner(System.in);
+    AviondbJpaController avionConsult = new AviondbJpaController(emf);
+    System.out.println("\nIngrese el ID para eliminar:");
+    int id = sc.nextInt();   
+    Aviondb delAvion = avionConsult.findAviondb(id);
+    if (delAvion != null) {
+        try {            
+            em.getTransaction().begin();
+            delAvion = em.find(Aviondb.class, id);
+            em.remove(delAvion);
+            em.getTransaction().commit();
+            System.out.println("\n  El registro ha sido eliminado exitosamente :D");
+            preguntaFinal();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
+    } else {
+        System.out.println("\n  El ID no se encuentra registrado\n     INTENTE NUEVAMENTE");
+        deleteAvion();
 }
 }
