@@ -83,7 +83,7 @@ public class  Proyecto{
                     TorreHanoi();         
                     break;
                 case 'd':
-                    System.out.println("\nRegresando al menú principal...");
+                    System.out.println("\nRegresando al menú principal...");                   
                     return; // Regresar al menú principal
                 default:
                     System.out.println("Opción no válida. Intente de nuevo.");
@@ -141,6 +141,7 @@ public class  Proyecto{
                     break;
                 case 'd':
                     System.out.println("\nRegresando al menú principal...");
+                    mostrarMenu();
                     return; // Regresar al menú principal
                 default:
                     System.out.println("Opción no válida. Intente de nuevo.");
@@ -445,7 +446,7 @@ for(int i=0; i < vehiculos.length; i++){
                             ///////////////////////////////////////// FASE 3 ////////////////////////////////////////
   public static void preguntaFinal(){
       Scanner sc = new Scanner(System.in);
-      System.out.println("\n¿Qué desea hacer a continuación?:\n1. Ir al Menú Principal\n2. Agregar otro vehículo");     
+      System.out.println("\n¿Qué desea hacer a continuación?:\n1. Ir al Menú Principal\n2. Continuar en FASE 3");     
         int opcion = sc.nextInt();  
         sc.nextLine(); 
     switch (opcion) {
@@ -454,7 +455,6 @@ for(int i=0; i < vehiculos.length; i++){
             mostrarMenu();  
             break;
         case 2:
-            System.out.println("\nContinuar en FASE 3\n");
             mostrarSubMenu3();
             break;
         default:
@@ -544,6 +544,7 @@ public static void consultCarro() {
         em.close();
     }
     for (Carrodb carro:carroArray){
+        System.out.println("\n      -REGISTROS ALMACENNADOS:");
         System.out.println("\nID: "+ carro.getIdCarro());
         System.out.println("Gas: "+ carro.getGas());
         System.out.println("Marca: "+ carro.getMarca());
@@ -704,6 +705,7 @@ public static void consultBalsa() {
         em.close();
     }
     for (Balsadb balsa:balsaArray){
+        System.out.println("\n      -REGISTROS ALMACENNADOS:");
         System.out.println("\nID: "+ balsa.getIdBalsa());
         System.out.println("Gas: "+ balsa.getMotor());
         System.out.println("Marca: "+ balsa.getMarca());
@@ -866,6 +868,7 @@ public static void consultAvion() {
         em.close();
     }
     for (Aviondb avion:avionArray){
+        System.out.println("\n      -REGISTROS ALMACENNADOS:");
         System.out.println("\nID: "+ avion.getIdAvion());
         System.out.println("Pasajeros: "+ avion.getPasajeros());
         System.out.println("Marca: "+ avion.getMarca());
@@ -938,5 +941,6 @@ public static void deleteAvion() {
     } else {
         System.out.println("\n  El ID no se encuentra registrado\n     INTENTE NUEVAMENTE");
         deleteAvion();
+}
 }
 }
