@@ -1,6 +1,8 @@
 package miumg.edu.gt.programaigrupo62024;
 
 
+import clases_db.Balsadb;
+import clases_db.BalsadbJpaController;
 import clases_db.Carrodb;
 import clases_db.CarrodbJpaController;
 import java.util.ArrayList;
@@ -130,7 +132,7 @@ public class  Proyecto{
                     trabajarCarro();
                     break;
                 case 'b':
-                                             
+                    trabajarBalsa();                         
                     break;
                 case 'c':
                              
@@ -615,5 +617,167 @@ public static void deleteCarro() {
         System.out.println("\n  El ID no se encuentra registrado\n     INTENTE NUEVAMENTE");
         deleteCarro();
     }
+}
+
+//codigo Realizado por Juan Y Miguel 
+private static void trabajarBalsa (){
+        char opcion;
+        Scanner scanner = new Scanner(System.in);
+        do {
+            System.out.println("\n       Trabajando con BALSAS");
+            System.out.println(" C: Insertar\n R: Consultar\n"
+                    + " U: Actualizar\n D: Eliminar\n A: Volver al Menu Principal");
+            System.out.print("\n------Ingrese su opción: ");
+            opcion = scanner.next().charAt(0);
+            switch (opcion) {
+                case 'C':
+                    insertBalsa();
+                    break;
+                case 'R':
+                    consultBalsa();                      
+                    break;
+                case 'U':
+                    actualizarBalsa();      
+                    break;
+                case 'D':
+                    deleteBalsa();         
+                    break;
+                case 'A':
+                    System.out.println("\nRegresando al menú principal...");
+                    mostrarMenu();
+                    break; // Regresar al menú principal
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+            }
+        } while (true);
+}
+
+public static void insertBalsa() { 
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("miumg.edu.gt_Proyecto_jar_1.0-SNAPSHOTPU");
+    EntityManager em = emf.createEntityManager();
+    Scanner sc = new Scanner(System.in);  // Definir Scanner al inicio y usar el mismo en todo el método
+    Balsadb inBalsa = new Balsadb();      
+    
+    System.out.println("\n    Insertar: BALSA");
+    System.out.println("-Motor o Remo: ");
+    String Motor = sc.nextLine();
+    inBalsa.setMotor(Motor);
+    System.out.println("-Marca:");
+    String marca = sc.nextLine();
+    inBalsa.setMarca(marca);
+    System.out.println("-Modelo:");
+    String modelo = sc.nextLine();
+    inBalsa.setModelo(modelo);
+    System.out.println("-Color:"); 
+    String color = sc.nextLine();
+    inBalsa.setColor(color);
+
+    try {
+        em.getTransaction().begin();
+        em.persist(inBalsa);
+        em.getTransaction().commit();
+        System.out.println("Balsa insertado correctamente.");
+    } catch (Exception e) {
+        if (em.getTransaction().isActive()) {
+            em.getTransaction().rollback();
+        }
+System.out.println("Exception-> " + e);
+    } finally {
+        em.close();
+    }
+    preguntaFinal();
+} 
+
+public static void consultBalsa() { 
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("miumg.edu.gt_Proyecto_jar_1.0-SNAPSHOTPU");
+    EntityManager em = emf.createEntityManager();
+    Scanner sc=new Scanner (System.in);
+    List<Balsadb> balsaArray = new ArrayList<>();
+    BalsadbJpaController balsaConsult=new BalsadbJpaController(emf);
+    try{
+       balsaArray= balsaConsult.findBalsadbEntities();
+    }catch(Exception e){
+        e.printStackTrace();
+    }finally{
+        em.close();
+    }
+    for (Balsadb balsa:balsaArray){
+        System.out.println("\nID: "+ balsa.getIdBalsa());
+        System.out.println("Gas: "+ balsa.getMotor());
+        System.out.println("Marca: "+ balsa.getMarca());
+        System.out.println("Modelo: "+ balsa.getModelo());
+        System.out.println("Color: "+ balsa.getColor());
+}
+    preguntaFinal();
+}
+
+public static void actualizarBalsa() {
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("miumg.edu.gt_Proyecto_jar_1.0-SNAPSHOTPU");
+    EntityManager em = emf.createEntityManager();
+    Scanner sc = new Scanner(System.in);
+    BalsadbJpaController balsaConsult = new BalsadbJpaController(emf);
+    System.out.println("\nIngrese el ID para modificar:");
+    int id = sc.nextInt();   
+    Balsadb actBalsa = balsaConsult.findBalsadb(id);
+    if (actBalsa != null) {
+        try {
+            System.out.println("Ingrese el nuevo color:");
+            String nuevoColor = sc.next();
+            System.out.println("Ingrese el nuevo tipo de Motor:");
+            String nuevoMotor = sc.next();
+            System.out.println("Ingrese la nueva marca:");
+            String nuevaMarca = sc.next();
+            System.out.println("Ingrese el nuevo modelo:");
+            String nuevoModelo = sc.next();            
+            em.getTransaction().begin();
+            actBalsa.setColor(nuevoColor);
+            actBalsa.setMotor(nuevoMotor);
+            actBalsa.setMarca(nuevaMarca);
+            actBalsa.setModelo(nuevoModelo);
+            em.merge(actBalsa);// método merge para actualizar el objeto 
+            em.getTransaction().commit();
+            System.out.println("\n  El registro ha sido actualizado exitosamente :D");
+            preguntaFinal();
+ } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
+    } else {
+        System.out.println("\n  El ID no se encuentra registrado\n     INTENTE NUEVAMENTE");
+        actualizarBalsa();
+    }
+}
+
+public static void deleteBalsa() {
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("miumg.edu.gt_Proyecto_jar_1.0-SNAPSHOTPU");
+    EntityManager em = emf.createEntityManager();
+    Scanner sc = new Scanner(System.in);
+    BalsadbJpaController balsaConsult = new BalsadbJpaController(emf);
+    System.out.println("\nIngrese el ID para eliminar:");
+    int id = sc.nextInt();   
+    Balsadb delBalsa = balsaConsult.findBalsadb(id);
+    if (delBalsa != null) {
+        try {            
+            em.getTransaction().begin();
+            delBalsa = em.find(Balsadb.class, id);
+            em.remove(delBalsa);
+            em.getTransaction().commit();
+            System.out.println("\n  El registro ha sido eliminado exitosamente :D");
+            preguntaFinal();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
+    } else {
+        System.out.println("\n  El ID no se encuentra registrado\n     INTENTE NUEVAMENTE");
+        deleteBalsa();
+}
+
 }
 }
